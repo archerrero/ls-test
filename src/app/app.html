@@ -1,0 +1,150 @@
+<main ng-controller="AppCtrl">
+
+  <section class="row">
+    <div class="col-md-6 ">
+
+
+      <!-- Search block -->
+      <article class="form-group">
+
+        <div class=" input-wrapper">
+
+          <label>Поиск организации или ИП</label>
+
+          <input
+            id=""
+            name="address"
+            type="text"
+            class="form-control"
+            ng-model="party"
+            placeholder="Введите название организации или ИП"
+            ng-change="searchParty()" />
+
+          <ul
+            class="list-group"
+            ng-show="isSuggestionShow">
+
+            <li
+              ng-click="onPartyChoose(item)"
+              ng-repeat="item in response"
+              class="list-group-item list-group-item-action">
+
+              {{item.value}}
+            </li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Passport block -->
+      <form
+        name="passport"
+        class="form-group"
+        ng-show="selectedSupervisors">
+
+        <div
+          class="form-group">
+
+          <label >ФИО</label>
+
+          <input
+            id=""AppCtrl
+            type="text"
+            class="form-control"
+            name="name"
+            required
+            ng-model="selectedSupervisors.name" />
+        </div>
+
+        <div
+          class="form-group">
+
+          <label >Кем выдан паспорт</label>
+
+          <textarea
+            class="form-control"
+            required
+            name="issuedBy"
+            ng-model="selectedSupervisors.issuedBy">
+          </textarea>
+        </div>
+
+
+        <div
+          class="form-group">
+
+          <label >Серия и номер паспорта</label>
+
+          <input
+            id=""
+            type="number"
+            class="form-control"
+            required
+            name="number"
+            ng-model="selectedSupervisors.number" />
+        </div>
+
+        <div class="row">
+
+          <div
+            class="form-group col-md-6"
+            ng-show="selectedSupervisors">
+
+            <label >Дата выдачи</label>
+
+            <input
+              id=""
+              type="date"
+              class="form-control"
+              required
+              name="issuedDate"
+              ng-model="selectedSupervisors.issuedDate" />
+          </div>
+
+          <div
+            class="form-group col-md-6"
+            ng-show="selectedSupervisors">
+
+            <label >Код подразделения</label>
+
+            <input
+              id=""
+              type="number"
+              class="form-control"
+              required
+              name="code"
+              ng-model="selectedSupervisors.code" />
+          </div>
+
+        </div>
+
+        <button
+          ng-click="saveData(selectedSupervisors)"
+          ng-class="{disabled: passport.$invalid}"
+          type="submit"
+          class="btn btn-primary">
+          Сохранить
+        </button>
+      </form>
+
+    </div>
+
+    <aside
+      class="col-md-6"
+      ng-show="savedDataShow">
+      <h1>Сохраненные данные</h1>
+
+      <ul class="list-group">
+
+        <li
+          ng-click="setForChanges(id)"
+          class="list-group-item list-group-item-action"
+          ng-repeat="(id, supervisor) in savedData.supervisors">
+          {{supervisor.name}}
+        </li>
+      </ul>
+    </aside>
+  </section>
+
+
+
+</main>
