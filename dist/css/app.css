@@ -1,4 +1,8 @@
 /* styles in src/style directory are applied to the whole page */
+body {
+
+}
+
 a {
   color: #03A9F4;
 }
